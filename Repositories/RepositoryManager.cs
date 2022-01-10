@@ -14,12 +14,14 @@ namespace Repositories
         private readonly AppDbContext dbContext;
         private readonly ILogger _logger;
         public IBookRepository Book { get; private set; }
+        public IUserRepository User { get; private set; }
 
         public RepositoryManager(AppDbContext dbContext, ILoggerFactory logger)
         {
             this.dbContext = dbContext;
             _logger = logger.CreateLogger("logs");
             Book = new BookRepository(dbContext, _logger);
+            User = new UserRepository(dbContext, _logger);
         }
         public async Task SaveChangesAsync()
         {

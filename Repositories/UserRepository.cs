@@ -1,6 +1,6 @@
 ﻿using Contracts;
 using Entities;
-using Entities.Models.Book;
+using Entities.Models.User;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
@@ -11,28 +11,28 @@ using System.Threading.Tasks;
 
 namespace Repositories
 {
-    public class BookRepository : GenericRepository<Book>, IBookRepository
+    public class UserRepository : GenericRepository<User>, IUserRepository
     {
-        public BookRepository(AppDbContext dbContext, ILogger logger) : base(dbContext, logger)
+        public UserRepository(AppDbContext dbContext, ILogger logger) : base(dbContext, logger)
         {
         }
 
-        public override async Task<IEnumerable<Book>> GetAll()
+        public override async Task<IEnumerable<User>> GetAll()
         {
             try
             {
                 return await dbset.ToListAsync();
             }
 
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                logger.LogError(ex, "GetAll method failed", typeof(BookRepository));
-                return new List<Book>();
+                logger.LogError(ex, "GetAll method failed", typeof(UserRepository));
+                return new List<User>();
             }
-            
+
         }
 
-        public override async Task<Book> GetById(Guid id)
+        public override async Task<User> GetById(Guid id)
         {
             try
             {
@@ -41,12 +41,12 @@ namespace Repositories
 
             catch (Exception ex)
             {
-                logger.LogError(ex, "GetById method failed", typeof(BookRepository));
-                return new Book();
+                logger.LogError(ex, "GetById method failed", typeof(UserRepository));
+                return new User();
             }
         }
 
-        public override async Task<bool> Create(Book entity)
+        public override async Task<bool> Create(User entity)
         {
             try
             {
@@ -55,14 +55,14 @@ namespace Repositories
                 return true;
             }
 
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                logger.LogError(ex, "Create method failed", typeof(BookRepository));
+                logger.LogError(ex, "Create method failed", typeof(UserRepository));
                 return false;
             }
         }
 
-        public override async Task<bool> Update(Book entity)
+        public override async Task<bool> Update(User entity)
         {
             try
             {
@@ -72,20 +72,16 @@ namespace Repositories
                     await dbset.AddAsync(entity);
                 }
 
-                obj.Name = entity.Name;
-                obj.Author = entity.Author;
-                obj.Year = entity.Year;
-                obj.Publisher = entity.Publisher;
-                obj.Bind = entity.Bind;
-                obj.Description = entity.Description;
-                obj.Genre = entity.Genre;
-                obj.Language = entity.Language;
+                obj.Username = entity.Username;
+                obj.Email = entity.Email;
+                obj.Password = entity.Password;
+                obj.UserRole = entity.UserRole;
                 return true;
             }
 
             catch (Exception ex)
             {
-                logger.LogError(ex, "Update method failed", typeof(BookRepository));
+                logger.LogError(ex, "Update method failed", typeof(UserRepository));
                 return false;
             }
         }
@@ -99,12 +95,12 @@ namespace Repositories
                 dbset.Remove(obj);
                 return true;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                logger.LogError(ex, "Delete method failed", typeof(BookRepository));
+                logger.LogError(ex, "Delete method failed", typeof(UserRepository));
                 return false;
             }
         }
-        
+
     }
 }

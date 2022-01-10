@@ -1,4 +1,5 @@
 ﻿using Entities.Models.Book;
+using Entities.Models.User;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,6 @@ namespace Entities
     {
         public AppDbContext(DbContextOptions options) : base(options)
         {
-            Database.EnsureCreated();
         }
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -20,6 +20,7 @@ namespace Entities
             base.OnModelCreating(builder);
         }
         public virtual DbSet<Book> Books { get; set; }
+        public virtual DbSet<User> Users { get; set; }
 
     }
 }
