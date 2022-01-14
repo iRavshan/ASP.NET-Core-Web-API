@@ -9,9 +9,11 @@ namespace Entities.Models.Book
     public enum LanguageEnums
     {
         Uzbek,
+        Arab,
+        Tojik,
         Rus,
-        Ingliz,
         Qoraqalpoq,
-        Turkcha
+        Turk,
+        Ingliz
     }
 }

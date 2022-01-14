@@ -36,7 +36,8 @@ namespace eBookWebAPI
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "eBookWebAPI", Version = "v1" });
             });
-            services.AddDbContextPool<AppDbContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("EBookDB")));
+
+            services.AddDbContextPool<AppDbContext>(opt => opt.UseNpgsql(Configuration.GetConnectionString("EBookDB")));
             services.AddScoped<IRepositoryManager, RepositoryManager>();
         }
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

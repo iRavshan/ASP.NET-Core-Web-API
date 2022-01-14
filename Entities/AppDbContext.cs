@@ -21,6 +21,7 @@ namespace Entities
         }
         public virtual DbSet<Book> Books { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Genre> Genres { get; set; }
 
     }
 }

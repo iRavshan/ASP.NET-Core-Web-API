@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace Entities.Models.Book
 {
-    public class Book 
+    public class Book
     {
-        [Column("BookId")]
         [Key]
+        [Column("BookId")]
         public Guid Id { get; set; } //Id
 
         [Required]
@@ -21,12 +21,12 @@ namespace Entities.Models.Book
         public string Author { get; set; } //muallifi
 
         [Required]
+        [MinLength(4)]
+        [MaxLength(4)]
         public int Year { get; set; } //nashr yili
 
         [Required]
         public string Publisher { get; set; } //nashriyot 
-
-        [Required]
         public GenreEnums Genre { get; set; } //janri
 
         [Required]
